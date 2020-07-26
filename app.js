@@ -1,5 +1,12 @@
 const inquirer = require('inquirer');
 const myTeam = [];
+const firstQuestion = [
+    {
+        type: "input",
+        name: ""
+
+    }
+]
 const questions = [
     {
         type: "input",
