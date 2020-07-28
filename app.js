@@ -2,6 +2,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
+const uuid = require('uuid');
 const fs = require("fs");
 
 
@@ -12,11 +13,6 @@ inquirer
             type: "input",
             name: "name",
             message: "Please enter your name:",
-        },
-        {
-            type: "input",
-            name: "id",
-            message: "Please enter your id number:",
         },
         {
             type: "input",
@@ -37,33 +33,26 @@ inquirer
 
     ])
     .then(answers => {
-        switch (answers.name) {
-            case 'Manager':
-                inquirer
-                    .prompt({
-                        type: "input",
-                        name: "officeNumber",
-                        message: "Please enter your office number:",
-                    });
-        }
+        console.log(answers);
+        console.log(uuid.v1());
     });
 
 
 
-if (role === 'Manager') {
+// if (role === 'Manager') {
 
-} else if (role === 'Intern') {
-    inquirer
-        .prompt({
-            type: "input",
-            name: "school",
-            message: "Please enter your current school:",
-        });
-} else if (role === 'Engineer') {
-    inquirer
-        .prompt({
-            type: "input",
-            name: "github",
-            message: "Please enter your github username:",
-        });
-}
+// } else if (role === 'Intern') {
+//     inquirer
+//         .prompt({
+//             type: "input",
+//             name: "school",
+//             message: "Please enter your current school:",
+//         });
+// } else if (role === 'Engineer') {
+//     inquirer
+//         .prompt({
+//             type: "input",
+//             name: "github",
+//             message: "Please enter your github username:",
+//         });
+// }
