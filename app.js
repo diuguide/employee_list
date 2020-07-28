@@ -1,29 +1,13 @@
-var inquirer = require('inquirer');
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
+const inquirer = require("inquirer");
+const fs = require("fs");
 
-const questionsIntern = {
-    type: "input",
-    name: "school",
-    message: "Please enter your current school:",
-};
-const questionsEngineer = {
-    type: "input",
-    name: "github",
-    message: "Please enter your github username:",
-};
 
 inquirer
     .prompt([
-        {
-            type: "list",
-            name: "role",
-            message: "What is your position?",
-            choices: [
-                "Manager",
-                "Engineer",
-                "Intern",
-            ],
 
-        },
         {
             type: "input",
             name: "name",
@@ -39,17 +23,47 @@ inquirer
             name: "email",
             message: "Please enter your email address:",
         },
+        {
+            type: "list",
+            name: "role",
+            message: "What is your position?",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+            ],
 
+        },
 
     ])
     .then(answers => {
-
-    })
-    .catch(error => {
-        if (error.isTtyError) {
-            // Prompt couldn't be rendered in the current environment
-        } else {
-            // Something else when wrong
+        switch (answers.name) {
+            case 'Manager':
+                inquirer
+                    .prompt({
+                        type: "input",
+                        name: "officeNumber",
+                        message: "Please enter your office number:",
+                    });
         }
     });
 
+
+
+if (role === 'Manager') {
+
+} else if (role === 'Intern') {
+    inquirer
+        .prompt({
+            type: "input",
+            name: "school",
+            message: "Please enter your current school:",
+        });
+} else if (role === 'Engineer') {
+    inquirer
+        .prompt({
+            type: "input",
+            name: "github",
+            message: "Please enter your github username:",
+        });
+}

@@ -1,0 +1,26 @@
+{
+  "name": "employee_list",
+  "version": "1.0.0",
+  "description": "This application is a CLI software engineering team generator.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/diuguide/employee_list.git"
+  },
+  "author": "Everett Diuguid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diuguide/employee_list/issues"
+  },
+  "homepage": "https://github.com/diuguide/employee_list#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3"
+  }
+}
