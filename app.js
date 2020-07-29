@@ -59,9 +59,7 @@ inquirer
 }
 
 function generateHTML() {
-    console.log(employeedb);
     const team = RenderHTML(employeedb);
-    console.log(team);
     fs.writeFile("./output/team.html", team, function (err) {
         if (err) throw err;
         console.log("Team webpage has been generated");
