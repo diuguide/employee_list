@@ -1,71 +1,69 @@
+// pull in the required dependancies
+
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-const uuid = require('uuid');
 const fs = require("fs");
 const Employee = require("./lib/Employee");
 const RenderHTML = require('./lib/htmlRenderer');
 
-let id =1;
-console.log(id);
+// set base id to 1
+let id = 1;
 
+// create empty employee database
 const employeedb = [];
 
+// prompt to determine role
 function mainQuery() {
 
-inquirer
-    .prompt([
-
-     
-        {
-            type: "list",
-            name: "role",
-            message: "What is your position?",
-            choices: [
-                "Manager",
-                "Engineer",
-                "Intern",
-                "Exit"
-            ],
-
-        }
-
-    ])
-    .then(answers => {
-       // console.log(answers);
-
-        // fs.appendFileSync('answers.txt', JSON.stringify(answers));
+    inquirer
+        .prompt([
 
 
-        // answers.name = new Employee.name;
+            {
+                type: "list",
+                name: "role",
+                message: "What is your position?",
+                choices: [
+                    "Manager",
+                    "Engineer",
+                    "Intern",
+                    "Exit"
+                ],
 
+            }
 
-        switch (answers.role) {
-            case 'Manager':
-                managerQuery();
-                break;
-            case 'Engineer':
-                engineerQuery();
-                break;
-            case 'Intern':
-                internQuery();
-                break;
-         default: 
-                generateHTML();
-                break;
-        }
-    });
+        ])
+        .then(answers => {
+        // switch statement for each role  
+            switch (answers.role) {
+                case 'Manager':
+                    managerQuery();
+                    break;
+                case 'Engineer':
+                    engineerQuery();
+                    break;
+                case 'Intern':
+                    internQuery();
+                    break;
+                default:
+                    generateHTML();
+                    break;
+            }
+        });
 }
 
+// function to export the gathered information
 function generateHTML() {
     const team = RenderHTML(employeedb);
     fs.writeFile("./output/team.html", team, function (err) {
         if (err) throw err;
         console.log("Team webpage has been generated");
     })
-} 
+}
 
+// intern query
 function internQuery() {
     inquirer
         .prompt([
@@ -86,9 +84,12 @@ function internQuery() {
             }
         ])
         .then(answers => {
+
+        // create new intern class using constructors
             const intern = new Intern(answers.name, id++, answers.email, answers.school);
-           
+        // push new intern class to employee database    
             employeedb.push(intern);
+        // return to main menu
             mainQuery();
 
         });
@@ -111,12 +112,12 @@ function managerQuery() {
                 name: "officeNumber",
                 message: "Please enter your office number:"
             }
-            
-            
+
+
         ])
         .then(answers => {
             const manager = new Manager(answers.name, id++, answers.email, answers.officeNumber);
-           
+
             employeedb.push(manager);
             mainQuery();
         });
@@ -142,10 +143,12 @@ function engineerQuery() {
         ])
         .then(answers => {
             const engineer = new Engineer(answers.name, id++, answers.email, answers.github);
-           
+
             employeedb.push(engineer);
             mainQuery();
 
         });
 }
+
+// begin program
 mainQuery();
